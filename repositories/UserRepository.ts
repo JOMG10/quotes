@@ -1,4 +1,4 @@
-import { User } from "../interfaces/User.ts";
+import { User } from "../interfaces/user.ts";
 import  UserModel  from "../models/UserModel.ts";
 
 

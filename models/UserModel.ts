@@ -1,6 +1,6 @@
 
 import { connectorMariaDB } 
-from "../config/connectors.ts";  
+from "../config/conectors.ts";  
 
 
 export default  {

@@ -1,38 +1,42 @@
-import { User } from "../interfaces/User.ts";
-import  UserModel  from "../models/UserModel.ts";
+import { User } from "../interfaces/user.ts";
+import { default as userRepository  } 
+    from "../repositories/UserRepository.ts";
+
+import  sha512 from "../dependences.ts";
 
 
-class UserRepository { 
+class UserService {
 
-    async getUsers() { 
-        return await  UserModel.getAll();
+    isLoginUser = async (account: string, password: string)=>{
+        password = await sha512(password);   
+        return await userRepository.isLogin(account, password);
+        
     }
     
-    async getUser(id:number) { 
-        return await UserModel.getById(id);
-    } 
+    fetchUsers = async () =>  {
+        return  await userRepository.getUsers();
+    };
 
-    async isLogin(account:string, password:string) { 
-        return  await UserModel.isLogin(account, password);
-    } 
-
-    async addUser(user: User) { 
-        return await UserModel.add(user.account, user.password);
+      
+    fetchUser = async (id: number) =>{
+        return await userRepository.getUser(id);
     }
-
+        
     
+    
+    createUser = async (user: User) => {
+        return await userRepository.addUser(user)  
+    };
 
-    async updateUser(id: number, user: User) { 
-        const updatedUser = await  UserModel.updateById(id, user.account, user.password);
-        return await this.getUser(id); 
-    }
+    updateUser = async (id: number, user:User) => {  
+        user.password = await sha512(user.password); 
+        return await userRepository.updateUser(id,user);
+    };
 
-    async deleteUser(id: number) {
-        let userDeleted = await this.getUser(id); 
-        await UserModel.deleteById(id);
-        return userDeleted;
-    }
+    deleteUser = async (id: number) => {
+        return  await userRepository.deleteUser(id);
+    };
+}
 
-} 
+export default new UserService();
 
-export default new UserRepository();

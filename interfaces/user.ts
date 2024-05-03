@@ -10,7 +10,7 @@ import {
   loginUser,
   getUsers, 
   updateUser,
-} from "../controllers/UserController.ts";
+} from "../controller/UserController.ts";
 
 const router = new Router();
 

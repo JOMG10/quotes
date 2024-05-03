@@ -1,7 +1,7 @@
 import { Application } from "./dependences.ts";
 
 import routerQuotes from "./routes/quotes.ts";
-//import routerUsers from "./routes/users.ts";
+import routerUsers from "./routes/users.ts";
 
 
 import NotFound from "./middleware/notfound.ts";
@@ -22,8 +22,8 @@ app.use(errorHandler);
 app.use(routerQuotes.routes());
 app.use(routerQuotes.allowedMethods());
 //--- Users
-//app.use(routerUsers.routes());
-//app.use(routerUsers.allowedMethods());
+app.use(routerUsers.routes());
+app.use(routerUsers.allowedMethods());
 
 app.use(NotFound);
 

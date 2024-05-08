@@ -74,8 +74,10 @@ export const addQuote = async (
     {request, response}: { request: any; response: any },
 ) => {
 
-    if (request.body()){
-        const data = await request.body().value;
+    if (request.body.has){
+        const data = await request.body.json();
+
+        // const data = await request.body().value;
         if (data.quote && data.author && data.id){
             const quote = await quoteService.createQuote( data );
 
@@ -117,7 +119,9 @@ export const updateQuote = async (
     );
 
     if (currentQuote.length){
-        const data = await request.body().value;
+        const data = await request.body.json() ;
+
+        // const data = await request.body().value;
 
         if (data.quote || data.author) {
             const updatedQuote = await quoteService.updateQuote(

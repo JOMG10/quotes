@@ -77,9 +77,11 @@ export const loginUser = async (
     {request, response}: { request: any; response: any },
 ) => {
 
-    if (request.body()){
+    if (request.body.has){
         
-        const data = await request.body().value;
+        // const data = await request.body().value;
+        const data = await request.body.json();
+
         //console.log(data);
         const isLoginUser = await userService.isLoginUser(
             data.account, data.password);

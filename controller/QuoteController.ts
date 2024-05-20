@@ -72,7 +72,7 @@ export const getQuote = async (
 
 export const addQuote = async (
     {request, response}: { request: any; response: any },
-) => {
+) => { 
 
     if (request.body.has){
         const data = await request.body.json();
@@ -83,7 +83,7 @@ export const addQuote = async (
 
             response.status = Status.Created;
             response.body = {
-                success: true,
+                success: true, 
                 message: "save quote successfull", 
                 data: [quote],
             };
